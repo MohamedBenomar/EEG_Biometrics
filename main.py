@@ -10,9 +10,10 @@ import numpy as np
 import pandas as pd
 
 #from pyOpenBCI import cyton
-from ppeeg.PreProcessingEEG import PreProcessingEEG
-from RaspberryPiADS1299 import ADS1299_API
-#from ClassifierEEG_headset import ClassifierEEG
+from EEG_Biometrics.ppeeg import PreProcessingEEG
+from EEG_Biometrics.RaspberryPiADS1299 import ADS1299_API
+from EEG_Biometrics.ClassifiersModelsEEG import EEGModels, inception, resnet
+from EEG_Biometrics.ClassifierEEG import ClassifierEEG
 
 DEBUG = True
 
