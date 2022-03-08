@@ -1,6 +1,8 @@
 # EEG_Biometrics
 Library for EEG Biometrics project for HERO Lab - UC Irvine
 
+![This is an image](https://seekvectorlogo.com/university-of-california-irvine-uci-vector-logo-svg/][img]https://seekvectorlogo.com/wp-content/uploads/2020/02/university-of-california-irvine-uci-vector-logo.png)
+
 # Requirements
 
 - Python == 3.7 or 3.8
