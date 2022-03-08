@@ -1,7 +1,7 @@
 # EEG_Biometrics
-Library for EEG Biometrics project for HERO Lab - UC Irvine
+Library for EEG Biometrics project for HERO Lab - UC Irvine\
 
-![This is an image](https://cdn.freelogovectors.net/wp-content/uploads/2019/09/uci-logo.png)
+![This is an image](https://cdn.freelogovectors.net/wp-content/uploads/2019/09/uci-logo.png)\
 
 # Requirements
 
