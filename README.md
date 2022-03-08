@@ -39,7 +39,7 @@ Ref: https://github.com/wjcroft/RaspberryPiADS1299
 
 Python module with different Deep Learning Classifiers models for EEG biometrics
 
-This module requires "keras" and "tensorflow"
+This module requires 'keras' and 'tensorflow'
 
 ## ClassifierEEG
 
