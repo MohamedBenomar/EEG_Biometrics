@@ -58,3 +58,7 @@ Python module that makes the classification for the EEG samples read from the AD
 ## utilsEEG
 
 Python module with some usefull tools for the classification models
+
+## main
+
+Main script of the EEG Biometrics device. Use the OpenBCI headset to collect EEG signals from a subject and by the way of different tools and Deep Learning models, predict the person identity.
