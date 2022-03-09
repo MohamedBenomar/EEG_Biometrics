@@ -36,6 +36,8 @@ This module requires some libraries:
 
 Python module for interfacing with the OpenBCI devices.
 
+This module requires `Serial`
+
 ## RaspberryPiADS1299
 
 Python module for interfacing with host device and the ADS1299 (Analog-to-Digital Converter for Biopotential Measurements)
