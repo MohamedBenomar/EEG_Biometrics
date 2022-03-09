@@ -19,6 +19,10 @@ Library for EEG Biometrics project for HERO Lab - UC Irvine
 
 # Packages
 
+## prep
+
+Python module that implements the PrePipeline algorithm by epoching a raw eeg signals
+
 ## ppeeg
 
 Python module with some EEG preprocessing functions for biometrics applications
@@ -27,6 +31,10 @@ This module requires some libraries:
 - `pyprep` (Preprocessing Pipeline): Standardized preprocessing for large-scale EEG analysis. DOI: 10.3389/fninf.2015.00016
 - `MNE`: Open-source Python package for exploring, visualizing, and analyzing human neurophysiological data: MEG, EEG, sEEG, ECoG, NIRS, and more.
 - `Librosa`: Python package for music and audio analysis. It provides the building blocks necessary to create music information retrieval systems.
+
+## pyOpenBCI
+
+Python module for interfacing with the OpenBCI devices.
 
 ## RaspberryPiADS1299
 
