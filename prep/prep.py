@@ -72,8 +72,12 @@ class Epoch():
         '''
 
         self.event = event
-        self.events = raw['events']
-        self.record = raw['recording']
+        if event == None:
+            self.events = None
+            self.record = raw
+        else:
+            self.events = raw['events']
+            self.record = raw['recording']
         self.ch_names = ch_names
         self.ch_types = ch_types
         self.sfreq = sfreq
@@ -185,7 +189,8 @@ class Epoch():
             'max_iterations' : max_prep_iter
         }
         self._crop()
-        np_eeg = self.epoch[:, 2:-1].T
+        #np_eeg = self.epoch[:, 2:-1].T
+        np_eeg = self.epoch
         mne_eeg = mne.io.RawArray(np_eeg, info)
 
         try:
@@ -258,18 +263,52 @@ class Epoch():
                 np.save(f, self.numpy_array)
         else:
             print('Data too bad to use PREP, therefore no output numpy file.')
+            
     
 
-        
+'''
+from EEG_Biometrics import pyprep
+import mne
+import numpy as np 
+    
+event = None
+if event == None:
+    events = None
+    record = samples
+else:
+    events = raw['events']
+    record = raw['recording']
+ch_names = ch_names=['F3', 'FC5', 'AF3', 'F7', 'T7', 'P7', 'O1', 'O2', 'P8', 'T8', 'F8', 'AF4', 'FC6', 'F4']
+ch_types = 'eeg'
+sfreq = 256
+montage_kind = 'standard_1020'
+bad = None
+prep = None
+epoch = None
+mask = None
+numpy_array = None
 
-# ==============================================================================
-# SCRIPT TO PREPROCESS ALL FILES AT ONCE
-# NOTE: Assuming this script is stored in the same folder as that of all .mat
-# files.
-# ==============================================================================
-if __name__ == '__main__':
-    dirs = glob.glob('.' + os.sep + '*.mat')
-    for d in dirs:
-        epoch = Epoch(d)
-        epoch.fit()
-        epoch.save_numpy()
+
+
+info = mne.create_info(ch_names=ch_names, 
+                       sfreq=sfreq,
+                       ch_types=ch_types)
+montage = mne.channels.make_standard_montage(kind=montage_kind)
+prep_params = {
+    'ref_chs' : 'eeg',
+    'reref_chs' : 'eeg',
+    'line_freqs' : np.arange(60, sfreq / 2, 60),
+    'max_iterations' : 4
+}
+filter_kwargs={}
+
+np_eeg = samples
+mne_eeg = mne.io.RawArray(np_eeg, info)
+
+
+prep = pyprep.PrepPipeline(mne_eeg, prep_params, montage, 
+                           filter_kwargs=filter_kwargs,
+                           ransac=True)
+prep.fit()
+numpy_array = prep.EEG_clean
+'''

@@ -10,9 +10,9 @@ import numpy as np
 import pandas as pd
 
 #from EEG_Biometrics.ppeeg import PreProcessingEEG
-from EEG_Biometrics.prep import Epochs
+from EEG_Biometrics.prep import Epoch
 from EEG_Biometrics.RaspberryPiADS1299 import ADS1299_API
-from EEG_Biometrics.pyOpenBCI import cyton
+#from EEG_Biometrics.pyOpenBCI import cyton
 from EEG_Biometrics.ClassifiersModelsEEG import EEGModels, inception, resnet
 from EEG_Biometrics.ClassifierEEG import ClassifierEEG
 
@@ -30,9 +30,10 @@ buffer = []
 buffer_prep = []
 sampling_rate = 250
 sample_duration = 4  #1000 samples = 4 sec (1000/250)
-test_duration = 4
+test_duration = 8
 
 classifier_name  = "eegnet"
+root_dir = ""
 output_directory = root_dir + '/results/' + classifier_name + '/BED/'
 buffer_pred = []
 
@@ -95,15 +96,17 @@ def main():
             if DEBUG: print("\n\nIteration: {}\n\n".format(i))
             if DEBUG: print("Sample: {}\n".format(samples.shape))
             #EEG_raw = PreProcessingEEG.PREP(samples, DEBUG)
-            epoch = Epoch(samples)
-            EEG_cleaned = epoch.get_cleaned_eeg()
+            epoch = Epoch(samples, event=None)
+            EEG_cleaned = epoch.numpy_array
+            print(EEG_cleaned)
             
+            '''
             if DEBUG: print(EEG_raw)
             buffer_prep.append(EEG_cleaned)
             
             x_test, y_pred = ClassifierEEG.fitted_classifier(EEG_cleaned, classifier_name, output_directory)
             buffer_pred.append(y_pred)
-            
+            '''
             
             i += 1
             
@@ -111,7 +114,7 @@ def main():
             e = time.localtime()
             d=time.mktime(e)-time.mktime(s)
             current_time = time.strftime("%H:%M:%S", e)
-            print("\n\nEnding Time: {} \nTotal Time: {} sec ({} min)".format(current_time, d, d/60))
+            print("\n\n\nEnding Time: {} \nTotal Time: {} sec ({} min)".format(current_time, d, d/60))
             break
             
     
