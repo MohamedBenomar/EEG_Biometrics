@@ -99,7 +99,7 @@ def main():
             epoch = Epoch(samples, event=None)
             EEG_cleaned = epoch.numpy_array
             print(EEG_cleaned)
-            
+             
             '''
             if DEBUG: print(EEG_raw)
             buffer_prep.append(EEG_cleaned)
