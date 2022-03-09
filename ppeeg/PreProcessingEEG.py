@@ -3,7 +3,7 @@ import pandas as pd
 
 
 import mne
-from pyprep.prep_pipeline import PrepPipeline
+from EEG_Biometrics.pyprep.prep_pipeline import PrepPipeline
 import librosa.util as lu
 import librosa.feature as lf
 

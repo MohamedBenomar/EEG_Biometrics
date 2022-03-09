@@ -9,11 +9,13 @@ import threading
 import numpy as np
 import pandas as pd
 
-#from pyOpenBCI import cyton
-from EEG_Biometrics.ppeeg import PreProcessingEEG
+#from EEG_Biometrics.ppeeg import PreProcessingEEG
+from EEG_Biometrics.prep import Epochs
 from EEG_Biometrics.RaspberryPiADS1299 import ADS1299_API
+from EEG_Biometrics.pyOpenBCI import cyton
 from EEG_Biometrics.ClassifiersModelsEEG import EEGModels, inception, resnet
 from EEG_Biometrics.ClassifierEEG import ClassifierEEG
+
 
 DEBUG = True
 
@@ -31,7 +33,7 @@ sample_duration = 4  #1000 samples = 4 sec (1000/250)
 test_duration = 4
 
 classifier_name  = "eegnet"
-output_directory = root_dir + '/results/' + classifier_name + '/' +  dataset_name + '/'
+output_directory = root_dir + '/results/' + classifier_name + '/BED/'
 buffer_pred = []
 
 
@@ -92,12 +94,14 @@ def main():
         if samples.shape[1] >= (sample_duration*sampling_rate):
             if DEBUG: print("\n\nIteration: {}\n\n".format(i))
             if DEBUG: print("Sample: {}\n".format(samples.shape))
-            EEG_raw = PreProcessingEEG.PREP(samples, DEBUG)
+            #EEG_raw = PreProcessingEEG.PREP(samples, DEBUG)
+            epoch = Epoch(samples)
+            EEG_cleaned = epoch.get_cleaned_eeg()
             
             if DEBUG: print(EEG_raw)
-            buffer_prep.append(EEG_raw)
+            buffer_prep.append(EEG_cleaned)
             
-            x_test, y_pred = ClassifierEEG.fitted_classifier(EEG_raw, classifier_name, output_directory)
+            x_test, y_pred = ClassifierEEG.fitted_classifier(EEG_cleaned, classifier_name, output_directory)
             buffer_pred.append(y_pred)
             
             
