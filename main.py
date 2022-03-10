@@ -33,8 +33,7 @@ sample_duration = 4  #1000 samples = 4 sec (1000/250)
 test_duration = 8
 
 classifier_name  = "eegnet"
-root_dir = ""
-output_directory = root_dir + '/results/' + classifier_name + '/BED/'
+directory = './Classifiers_Trained_Models/' + classifier_name + '/'
 buffer_pred = []
 
 
@@ -81,7 +80,7 @@ def stop():
 
     
 def main():
-    global buffer, sample_duration, buffer_prep, DEBUG, classifier_name, output_directory
+    global buffer, sample_duration, buffer_prep, DEBUG, classifier_name, directory
 
     s = time.localtime()
     current_time = time.strftime("%H:%M:%S", s)
@@ -95,7 +94,6 @@ def main():
         if samples.shape[1] >= (sample_duration*sampling_rate):
             if DEBUG: print("\n\nIteration: {}\n\n".format(i))
             if DEBUG: print("Sample: {}\n".format(samples.shape))
-            #EEG_raw = PreProcessingEEG.PREP(samples, DEBUG)
             epoch = Epoch(samples, event=None)
             epoch.fit()
             EEG_cleaned = epoch.numpy_array
@@ -103,7 +101,7 @@ def main():
             if DEBUG: print(EEG_cleaned)
             buffer_prep.append(EEG_cleaned)
             
-            x_test, y_pred = ClassifierEEG.fitted_classifier(EEG_cleaned, classifier_name, output_directory)
+            x_test, y_pred = ClassifierEEG.fitted_classifier(EEG_cleaned, classifier_name, directory)
             buffer_pred.append(y_pred)
             
             i += 1

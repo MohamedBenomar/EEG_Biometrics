@@ -64,19 +64,19 @@ class ClassifierEEG(object):
     
         #standardizing the train/test datasets for each channel
         #x_train_preprocessed = np.zeros((x_train.shape[0], x_train.shape[1], x_train.shape[2]))
-        x_test_preprocessed  = np.zeros((x_test.shape[0], x_test.shape[1], x_test.shape[2]))
+        x_test_preprocessed  = np.zeros((x_test.shape[0], x_test.shape[1]))
         channels             = [i for i in range(x_test.shape[1])]
         
         for channel in channels:
-            x_test_channelData        = x_test[:,channel,:]
+            x_test_channelData        = x_test[:,channel]
             x_test_channelData        = np.expand_dims(standardizing_the_dataset(x_test_channelData), axis=1)
-            x_test_preprocessed[:,channel:channel+1,:]   = x_test_channelData
+            x_test_preprocessed[:,channel:channel+1]   = x_test_channelData
             
         x_test  = x_test_preprocessed
     
         #INITIALIZING THE CLASSIFIER TO BE TRAINED ON
         #input_shape = x_train.shape[1:]
-        input_shape = (14, 1024)
+        input_shape = (14, 1000)
         classifier = create_classifier(classifier_name, input_shape, nb_classes, output_directory)
     
         #LOADING THE MODEL AND EVALUATE IT USING THE TEST DATASET
@@ -114,15 +114,15 @@ class ClassifierEEG(object):
       # changed from "from classifier import fcn"    to    "import fcn"
         #GETTING THE CLASSIFIER THAT WE WANT TO BE TRAINED ON THE DATA
         if classifier_name == 'resnet':
-            import resnet
+            from EEG_Biometrics.ClassifiersModelsEEG import resnet
             return resnet.Classifier_RESNET(output_directory, input_shape, nb_classes, verbose)
         
         if classifier_name == 'inception':
-            import inception
+            from EEG_Biometrics.ClassifiersModelsEEG import inception
             return inception.Classifier_INCEPTION(output_directory, input_shape, nb_classes, verbose)
         
         if classifier_name == 'eegnet':
-            import EEGModels
+            from EEG_Biometrics.ClassifiersModelsEEG import EEGModels
             return EEGModels.Classifier_EEGNET(output_directory, input_shape, nb_classes, verbose)
     
     
