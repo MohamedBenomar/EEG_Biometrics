@@ -97,16 +97,14 @@ def main():
             if DEBUG: print("Sample: {}\n".format(samples.shape))
             #EEG_raw = PreProcessingEEG.PREP(samples, DEBUG)
             epoch = Epoch(samples, event=None)
+            epoch.fit()
             EEG_cleaned = epoch.numpy_array
-            print(EEG_cleaned)
-             
-            '''
-            if DEBUG: print(EEG_raw)
+            
+            if DEBUG: print(EEG_cleaned)
             buffer_prep.append(EEG_cleaned)
             
             x_test, y_pred = ClassifierEEG.fitted_classifier(EEG_cleaned, classifier_name, output_directory)
             buffer_pred.append(y_pred)
-            '''
             
             i += 1
             
