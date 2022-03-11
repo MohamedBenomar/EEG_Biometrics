@@ -101,8 +101,8 @@ def main():
             if DEBUG: print(EEG_cleaned)
             buffer_prep.append(EEG_cleaned)
             
-            x_test, y_pred = ClassifierEEG.fitted_classifier(EEG_cleaned, classifier_name, directory)
-            buffer_pred.append(y_pred)
+            #x_test, y_pred = ClassifierEEG.fitted_classifier(EEG_cleaned, classifier_name, directory)
+            #buffer_pred.append(y_pred)
             
             i += 1
             

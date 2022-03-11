@@ -40,7 +40,7 @@ class ClassifierEEG(object):
     
     
     
-    def standardizing_the_dataset(X_train):
+    def standardizingDataset(X_train):
         
         sc = StandardScaler()
         sc.fit(X_train)
@@ -69,7 +69,7 @@ class ClassifierEEG(object):
         
         for channel in channels:
             x_test_channelData        = x_test[:,channel]
-            x_test_channelData        = np.expand_dims(standardizing_the_dataset(x_test_channelData), axis=1)
+            x_test_channelData        = np.expand_dims(standardizingDataset(x_test_channelData), axis=1)
             x_test_preprocessed[:,channel:channel+1]   = x_test_channelData
             
         x_test  = x_test_preprocessed
@@ -144,7 +144,7 @@ class ClassifierEEG(object):
     
 
 
-
+'''
 if __name__ == "__main__":
     
     #--STARTING CODE ---- 
@@ -167,5 +167,5 @@ if __name__ == "__main__":
     x_test, y_true, x_train, y_train, y_test, y_pred, df_metrics = fitted_classifier()
     predictions = case_by_case_analysis(y_true, y_pred) #predictions[0] to see the correct and incorrect predictions.
 
-
+'''
 
