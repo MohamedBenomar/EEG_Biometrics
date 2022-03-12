@@ -17,7 +17,7 @@ from EEG_Biometrics.ClassifiersModelsEEG import EEGModels, inception, resnet
 from EEG_Biometrics.ClassifierEEG import ClassifierEEG
 
 
-DEBUG = True
+DEBUG = False
 
 PROCESS = "TEST"
 #PROCESS = "BCI"
